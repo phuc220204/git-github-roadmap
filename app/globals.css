@@ -693,6 +693,20 @@ button {
   flex: 1;
   min-height: 0;
   max-height: calc(100% - 120px); /* Space for input area */
+  padding: 16px; /* Default padding cho expanded mode */
+}
+
+/* Compact mode: tối ưu không gian cho message list */
+.compact-chat .message-list-container {
+  max-height: calc(100% - 120px); /* Tăng space cho message list */
+  padding: 12px 16px; /* Padding lớn hơn một chút */
+  overflow-x: hidden; /* Ngăn overflow ngang */
+  overflow-y: auto; /* Chỉ scroll dọc */
+}
+
+/* Compact mode: spacing thoải mái hơn giữa messages */
+.compact-chat .message-list-container .space-y-4 > * + * {
+  margin-top: 12px; /* Tăng từ 8px lên 12px cho thoải mái hơn */
 }
 
 /* Message items should wrap properly */
@@ -700,6 +714,37 @@ button {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Đảm bảo message content không overflow */
+.chat-message > div:last-child {
+  max-width: calc(100% - 40px); /* Trừ space cho avatar + gap */
+}
+
+.chat-message > div:last-child > div {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Compact mode: đảm bảo messages không overflow */
+.compact-chat .chat-message {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.compact-chat .chat-message > div:last-child {
+  max-width: calc(100% - 32px); /* Trừ space cho avatar nhỏ hơn */
+}
+
+.compact-chat .chat-message > div:last-child > div {
+  max-width: 100%;
+  word-break: break-word; /* Ngắt ở ranh giới từ thay vì break-all */
+  overflow-wrap: break-word; /* Consistency với expanded mode */
+  hyphens: auto; /* Tự động thêm gạch nối khi cần */
 }
 
 /* Code blocks should scroll horizontally, not expand dialog */
@@ -707,6 +752,90 @@ button {
   max-width: 100%;
   overflow-x: auto;
   white-space: pre;
+}
+
+/* Compact mode: code blocks tối ưu */
+.compact-chat .chat-content pre {
+  max-width: calc(100% - 8px);
+  font-size: 0.75rem;
+}
+
+/* Special handling cho URLs và từ dài */
+.chat-content a {
+  word-break: break-all; /* URLs có thể break anywhere */
+  overflow-wrap: break-word;
+}
+
+/* Vietnamese text optimization */
+.chat-content {
+  word-spacing: normal;
+  letter-spacing: normal;
+}
+
+/* Strong và em elements */
+.chat-content strong,
+.chat-content em {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Compact mode: prose content tối ưu */
+.compact-chat .chat-content {
+  font-size: 0.875rem;
+  line-height: 1.5; /* Tăng line-height cho dễ đọc */
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.compact-chat .chat-content p {
+  margin-bottom: 0.5rem;
+  word-break: break-word; /* Ngắt ở ranh giới từ */
+  overflow-wrap: break-word; /* Consistent với message container */
+  hyphens: auto; /* Tự động hyphen */
+  max-width: 100%;
+}
+
+.compact-chat .chat-content ul,
+.compact-chat .chat-content ol {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.compact-chat .chat-content li {
+  margin-bottom: 0.25rem;
+  word-break: break-word; /* Ngắt ở ranh giới từ */
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Expanded mode: prose content */
+.chat-content {
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.6; /* Line height thoải mái cho expanded mode */
+}
+
+.chat-content p {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto; /* Consistency với compact mode */
+  max-width: 100%;
+  margin-bottom: 0.75rem; /* Spacing thoải mái hơn */
+}
+
+.chat-content ul,
+.chat-content ol {
+  max-width: 100%;
+  margin-bottom: 0.75rem; /* Consistent spacing */
+}
+
+.chat-content li {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Message input optimizations */

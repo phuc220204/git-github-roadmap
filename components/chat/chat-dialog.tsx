@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   Dialog,
+  DialogContent,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { MessageList } from "./message-list";
@@ -30,10 +31,8 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
 
   // Compact mode: fixed window in bottom-right corner
   if (!isExpanded) {
-    if (!open) return null;
-    
-    return (
-      <div className="fixed bottom-4 right-4 w-80 h-96 bg-white dark:bg-gray-900 border shadow-xl rounded-lg z-50 flex flex-col">
+    if (!open) return null;    return (
+      <div className="fixed bottom-4 right-4 w-80 h-[600px] bg-white dark:bg-gray-900 border shadow-xl rounded-lg z-50 flex flex-col compact-chat">
         {/* Simple header */}
         <div className="flex items-center justify-between p-3 border-b bg-gray-50 dark:bg-gray-800 rounded-t-lg">
           <div className="flex items-center gap-2">
@@ -63,23 +62,20 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
             </Button>
           </div>
         </div>
-        
-        {/* Chat content */}
+          {/* Chat content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <MessageList />
-          <SuggestedQuestions />
+          <SuggestedQuestions isCompact={true} />
           <MessageInput />
         </div>
       </div>
     );
-  }
-  // Expanded mode: centered dialog
+  }  // Expanded mode: centered dialog
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <div className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-      <div className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white dark:bg-gray-900 p-0 shadow-xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg max-h-[90vh]">
-        {/* Simple header */}
-        <div className="flex flex-row items-center justify-between p-4 border-b bg-gray-50 dark:bg-gray-800 rounded-t-lg">
+      <DialogContent className="max-w-4xl max-h-[90vh] p-0 flex flex-col overflow-hidden">
+        {/* Header - với padding phải để không che nút X */}
+        <div className="flex items-center justify-between p-4 pr-12 border-b bg-gray-50 dark:bg-gray-800 rounded-t-lg flex-shrink-0">
           <div className="flex items-center gap-3">
             <Bot className="w-5 h-5 text-blue-600" />
             <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -107,25 +103,16 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
             >
               <Minimize2 className="w-4 h-4" />
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onOpenChange(false)}
-              className="hover:bg-gray-200 dark:hover:bg-gray-700"
-              title="Đóng"
-            >
-              <X className="w-4 h-4" />
-            </Button>
           </div>
         </div>
         
         {/* Chat content */}
         <div className="flex-1 flex flex-col overflow-hidden min-h-0">
           <MessageList />
-          <SuggestedQuestions />
+          <SuggestedQuestions isCompact={false} />
           <MessageInput />
         </div>
-      </div>
+      </DialogContent>
     </Dialog>
   );
 }

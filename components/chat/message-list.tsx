@@ -14,16 +14,16 @@ export function MessageList() {
   };
 
   useEffect(scrollToBottom, [messages]);  return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 message-list-container">
+    <div className="flex-1 overflow-y-auto space-y-4 message-list-container">
       {messages.length === 0 && (
-        <div className="flex flex-col items-center justify-center h-full text-center py-8">
-          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
-            <MessageCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+        <div className="flex flex-col items-center justify-center h-full text-center py-8 px-4">
+          <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-3">
+            <MessageCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Chào mừng bạn!
           </h3>
-          <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xs">
+          <p className="text-gray-500 dark:text-gray-400 text-xs max-w-xs">
             Tôi là trợ lý AI chuyên về Git và GitHub. Hãy hỏi tôi bất kỳ điều gì
             bạn muốn biết!
           </p>
