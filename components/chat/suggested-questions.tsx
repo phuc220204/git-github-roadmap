@@ -17,7 +17,9 @@ interface SuggestedQuestionsProps {
   isCompact?: boolean;
 }
 
-export function SuggestedQuestions({ isCompact = false }: SuggestedQuestionsProps) {
+export function SuggestedQuestions({
+  isCompact = false,
+}: SuggestedQuestionsProps) {
   const { sendMessage, isLoading, messages } = useChat();
   // Chỉ hiển thị khi chat còn ít tin nhắn
   if (messages.length > 2) return null;

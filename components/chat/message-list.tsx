@@ -13,7 +13,8 @@ export function MessageList() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(scrollToBottom, [messages]);  return (
+  useEffect(scrollToBottom, [messages]);
+  return (
     <div className="flex-1 overflow-y-auto space-y-4 message-list-container">
       {messages.length === 0 && (
         <div className="flex flex-col items-center justify-center h-full text-center py-8 px-4">

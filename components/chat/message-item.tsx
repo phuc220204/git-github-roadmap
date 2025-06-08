@@ -11,7 +11,8 @@ interface MessageItemProps {
 }
 
 export function MessageItem({ message }: MessageItemProps) {
-  const isUser = message.sender === "user";  return (
+  const isUser = message.sender === "user";
+  return (
     <div
       className={`flex gap-2 mb-4 chat-message w-full ${
         isUser ? "flex-row-reverse" : ""
@@ -35,12 +36,14 @@ export function MessageItem({ message }: MessageItemProps) {
         >
           {isUser ? (
             <p className="whitespace-pre-wrap">{message.content}</p>
-          ) : (            <div className="prose prose-sm dark:prose-invert max-w-none chat-content break-words overflow-hidden">
+          ) : (
+            <div className="prose prose-sm dark:prose-invert max-w-none chat-content break-words overflow-hidden">
               <ReactMarkdown
                 components={{
                   code: ({ className, children, ...props }) => {
                     const match = /language-(\w+)/.exec(className || "");
-                    const isInline = !match;                    if (isInline) {
+                    const isInline = !match;
+                    if (isInline) {
                       return (
                         <code
                           className="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded text-sm font-mono break-words"
@@ -52,13 +55,19 @@ export function MessageItem({ message }: MessageItemProps) {
                     }
                     return (
                       <pre className="bg-gray-200 dark:bg-gray-900 p-3 rounded-lg overflow-x-auto max-w-full">
-                        <code className="text-sm font-mono whitespace-pre-wrap break-words" {...props}>
+                        <code
+                          className="text-sm font-mono whitespace-pre-wrap break-words"
+                          {...props}
+                        >
                           {children}
                         </code>
                       </pre>
                     );
-                  },                  p: ({ children }) => (
-                    <p className="mb-2 last:mb-0 break-words overflow-hidden leading-relaxed">{children}</p>
+                  },
+                  p: ({ children }) => (
+                    <p className="mb-2 last:mb-0 break-words overflow-hidden leading-relaxed">
+                      {children}
+                    </p>
                   ),
                   ul: ({ children }) => (
                     <ul className="list-disc ml-4 mb-2">{children}</ul>

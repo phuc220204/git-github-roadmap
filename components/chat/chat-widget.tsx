@@ -11,7 +11,9 @@ export function ChatWidget() {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">        <Button
+      <div className="fixed bottom-6 right-6 z-50">
+        {" "}
+        <Button
           onClick={() => setOpen(true)}
           className={cn(
             "w-12 h-12 rounded-full shadow-lg transition-all duration-200 hover:scale-105",

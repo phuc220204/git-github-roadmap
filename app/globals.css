@@ -884,7 +884,7 @@ button {
     min-height: 150px;
     max-height: calc(85vh - 160px);
   }
-  
+
   .chat-message {
     word-break: break-word;
     hyphens: auto;

@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { MessageList } from "./message-list";
 import { MessageInput } from "./message-input";
@@ -31,7 +28,8 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
 
   // Compact mode: fixed window in bottom-right corner
   if (!isExpanded) {
-    if (!open) return null;    return (
+    if (!open) return null;
+    return (
       <div className="fixed bottom-4 right-4 w-80 h-[600px] bg-white dark:bg-gray-900 border shadow-xl rounded-lg z-50 flex flex-col compact-chat">
         {/* Simple header */}
         <div className="flex items-center justify-between p-3 border-b bg-gray-50 dark:bg-gray-800 rounded-t-lg">
@@ -62,7 +60,7 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
             </Button>
           </div>
         </div>
-          {/* Chat content */}
+        {/* Chat content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <MessageList />
           <SuggestedQuestions isCompact={true} />
@@ -70,7 +68,7 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
         </div>
       </div>
     );
-  }  // Expanded mode: centered dialog
+  } // Expanded mode: centered dialog
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] p-0 flex flex-col overflow-hidden">
@@ -105,7 +103,7 @@ export function ChatDialog({ open, onOpenChange }: ChatDialogProps) {
             </Button>
           </div>
         </div>
-        
+
         {/* Chat content */}
         <div className="flex-1 flex flex-col overflow-hidden min-h-0">
           <MessageList />
