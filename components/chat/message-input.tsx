@@ -26,11 +26,10 @@ export function MessageInput() {
       handleSubmit(e);
     }
   };
-
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 border-t bg-white dark:bg-gray-900"
+      className="p-4 border-t bg-white dark:bg-gray-900 message-input-container"
     >
       <div className="flex gap-2">
         <Textarea

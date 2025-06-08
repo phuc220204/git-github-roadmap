@@ -13,13 +13,12 @@ export function MessageList() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(scrollToBottom, [messages]);
-  return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-transparent to-gray-50/30 dark:to-gray-900/30">
+  useEffect(scrollToBottom, [messages]);  return (
+    <div className="flex-1 overflow-y-auto p-4 space-y-4 message-list-container">
       {messages.length === 0 && (
         <div className="flex flex-col items-center justify-center h-full text-center py-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900/30 dark:to-blue-900/30 rounded-full flex items-center justify-center mb-4">
-            <MessageCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
+            <MessageCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </div>
           <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Chào mừng bạn!

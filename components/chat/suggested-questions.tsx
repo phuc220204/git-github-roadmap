@@ -19,10 +19,8 @@ export function SuggestedQuestions() {
   const { sendMessage, isLoading, messages } = useChat();
 
   // Chỉ hiển thị khi chat còn ít tin nhắn
-  if (messages.length > 2) return null;
-
-  return (
-    <Card className="p-4 m-4 bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950 dark:to-green-950">
+  if (messages.length > 2) return null;  return (
+    <Card className="p-4 m-4 bg-gray-50 dark:bg-gray-800 suggested-questions-container">
       <h3 className="font-semibold text-sm mb-3 text-gray-700 dark:text-gray-300">
         Một số câu hỏi bạn có thể quan tâm:
       </h3>

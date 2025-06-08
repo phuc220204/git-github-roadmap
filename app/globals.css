@@ -549,47 +549,34 @@ button {
   transform: translateX(100%);
 }
 
-/* Smooth animations for all chat components */
-.chat-dialog *,
-.chat-dialog-expanded * {
-  transition: all 0.2s ease;
-}
-
-/* Better scroll styling for chat */
-.chat-dialog ::-webkit-scrollbar,
-.chat-dialog-expanded ::-webkit-scrollbar {
+/* Simple scroll styling for chat */
+::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-dialog ::-webkit-scrollbar-track,
-.chat-dialog-expanded ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
 
-.chat-dialog ::-webkit-scrollbar-thumb,
-.chat-dialog-expanded ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 
-.chat-dialog ::-webkit-scrollbar-thumb:hover,
-.chat-dialog-expanded ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.dark .chat-dialog ::-webkit-scrollbar-track,
-.dark .chat-dialog-expanded ::-webkit-scrollbar-track {
+.dark ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.dark .chat-dialog ::-webkit-scrollbar-thumb,
-.dark .chat-dialog-expanded ::-webkit-scrollbar-thumb {
+.dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.dark .chat-dialog ::-webkit-scrollbar-thumb:hover,
-.dark .chat-dialog-expanded ::-webkit-scrollbar-thumb:hover {
+.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
 
@@ -688,115 +675,148 @@ button {
   }
 }
 
-/* Enhanced Chat Dialog Styling */
+/* Simple Chat Dialog Styling */
+
+/* Fixed compact chat window */
+.chat-compact-window {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 20rem;
+  height: 24rem;
+  z-index: 50;
+}
+
+/* Message list container should be scrollable */
+.message-list-container {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  max-height: calc(100% - 120px); /* Space for input area */
+}
+
+/* Message items should wrap properly */
+.chat-message {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Code blocks should scroll horizontally, not expand dialog */
+.chat-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Message input optimizations */
+.chat-dialog .message-input-container,
+.chat-dialog-expanded .message-input-container {
+  flex-shrink: 0; /* Prevent shrinking */
+  max-height: 140px; /* Limit input area height */
+}
+
+/* Suggested questions optimization */
+.chat-dialog .suggested-questions-container,
+.chat-dialog-expanded .suggested-questions-container {
+  flex-shrink: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Ensure message list takes up remaining space */
+.chat-dialog .message-list-container,
+.chat-dialog-expanded .message-list-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 200px; /* Minimum height for messages */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chat-dialog,
+  .chat-dialog-expanded {
+    max-width: 95vw !important;
+    width: 95vw !important;
+    max-height: 85vh !important;
+    margin: 2.5vh auto !important;
+  }
+
+  .chat-dialog .message-list-container,
+  .chat-dialog-expanded .message-list-container {
+    max-height: calc(85vh - 180px);
+  }
+}
+
+/* Better spacing for mobile */
+@media (max-width: 640px) {
+  .chat-dialog .message-list-container,
+  .chat-dialog-expanded .message-list-container {
+    min-height: 150px;
+    max-height: calc(85vh - 160px);
+  }
+  
+  .chat-message {
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Additional chat dialog optimizations */
+.chat-dialog .flex-1,
+.chat-dialog-expanded .flex-1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Ensure proper text wrapping in all message content */
+.chat-message * {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 100% !important;
+}
+
+/* Prevent horizontal overflow in the dialog */
 .chat-dialog,
 .chat-dialog-expanded {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.98) 100%
-  ) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
-    0 0 60px rgba(59, 130, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
-}
-
-.dark .chat-dialog,
-.dark .chat-dialog-expanded {
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 0.95) 0%,
-    rgba(30, 41, 59, 0.98) 100%
-  ) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Floating animation for bot icon */
-.chat-dialog .relative.group:first-child,
-.chat-dialog-expanded .relative.group:first-child {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Sparkle effect */
-.chat-dialog::before,
-.chat-dialog-expanded::before {
-  content: "";
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, #60a5fa, transparent);
-  border-radius: 50%;
-  animation: sparkle 3s ease-in-out infinite;
-}
-
-.chat-dialog::after,
-.chat-dialog-expanded::after {
-  content: "";
-  position: absolute;
-  top: 70%;
-  right: 15%;
-  width: 3px;
-  height: 3px;
-  background: radial-gradient(circle, #a78bfa, transparent);
-  border-radius: 50%;
-  animation: sparkle 3s ease-in-out infinite 1.5s;
-}
-
-/* Enhanced button glow effects */
-.chat-dialog button:hover,
-.chat-dialog-expanded button:hover {
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
-/* Gradient text animation */
-.chat-dialog .bg-gradient-to-r.bg-clip-text,
-.chat-dialog-expanded .bg-gradient-to-r.bg-clip-text {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
-}
-
-/* Enhanced widget button */
-.chat-widget-button {
-  position: relative !important;
   overflow: hidden !important;
-  animation: float 6s ease-in-out infinite !important;
 }
 
-.chat-widget-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  animation: shimmer 2s infinite;
+.chat-dialog *,
+.chat-dialog-expanded * {
+  box-sizing: border-box;
 }
 
-/* Message animations */
-.chat-message {
-  animation: chat-slide-up 0.5s ease-out, float 8s ease-in-out infinite 2s;
+/* Enhanced scrollbar for better UX */
+.message-list-container::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Scrollbar enhancements */
-.chat-dialog ::-webkit-scrollbar-thumb,
-.chat-dialog-expanded ::-webkit-scrollbar-thumb {
+.message-list-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.message-list-container::-webkit-scrollbar-thumb {
   background: linear-gradient(45deg, #60a5fa, #a78bfa);
-  border-radius: 6px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
 
-.chat-dialog ::-webkit-scrollbar-thumb:hover,
-.chat-dialog-expanded ::-webkit-scrollbar-thumb:hover {
+.message-list-container::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.dark .message-list-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .message-list-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+}
+
+.dark .message-list-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #2563eb, #7c3aed);
 }
